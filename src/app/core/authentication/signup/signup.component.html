@@ -1,0 +1,35 @@
+<div class="container">
+
+  <img class="image-responsive" src="/assets/logo.png" alt="Nature">
+  <div class="title">
+    <p>Crie uma conta</p>
+  </div>
+  <form class="form" [formGroup]="signupForm" (ngSubmit)="register()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="nome">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="email@example.com">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" placeholder="senha">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirmar Senha</mat-label>
+      <input matInput type="password" placeholder="confirmar senha">
+    </mat-form-field>
+
+    <button mat-raised-button>Registrar</button>
+
+    <div class="alreadyRegistered">
+      <p>Já possui cadastro? <strong><a  [routerLink]="'/login'">Clique aqui</a></strong></p>
+    </div>
+  </form>
+
+</div>

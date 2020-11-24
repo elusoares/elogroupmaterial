@@ -1,14 +1,10 @@
 <div class="container">
 
-  <div class="logo">
-    <img src="/assets/logo.png" alt="Nature" class="image-responsive">
+  <img class="image-responsive" src="/assets/logo.png" alt="Nature">
+  <div class="title">
+    <p>Bem-Vindo</p>
   </div>
-  <form class="form" [formGroup]="loginForm" (ngSubmit)="register()">
-    <mat-form-field appearance="outline">
-      <mat-label>Nome</mat-label>
-      <input matInput placeholder="nome">
-    </mat-form-field>
-
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput type="email" placeholder="email@example.com">
@@ -19,12 +15,11 @@
       <input matInput type="password" placeholder="senha">
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Confirmar Senha</mat-label>
-      <input matInput type="password" placeholder="confirmar senha">
-    </mat-form-field>
+    <button mat-raised-button>Login</button>
 
-    <button mat-raised-button>Basic</button>
-
+    <div class="notRegistered">
+      <p>Não possui cadastro? <strong><a  [routerLink]="'/signup'">Clique aqui</a></strong></p>
+    </div>
   </form>
+
 </div>
