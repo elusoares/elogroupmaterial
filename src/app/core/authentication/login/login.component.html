@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div class="logo">
+    <img src="/assets/logo.png" alt="Nature" class="image-responsive">
+  </div>
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="register()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="nome">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="email@example.com">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" placeholder="senha">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirmar Senha</mat-label>
+      <input matInput type="password" placeholder="confirmar senha">
+    </mat-form-field>
+
+    <button mat-raised-button>Basic</button>
+
+  </form>
+</div>
