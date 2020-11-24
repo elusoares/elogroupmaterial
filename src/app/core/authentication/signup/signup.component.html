@@ -5,27 +5,134 @@
     <p>Crie uma conta</p>
   </div>
   <form class="form" [formGroup]="signupForm" (ngSubmit)="register()">
+
+    <!-- {{signupForm.hasError('hasPasswordmismatch')}}
+    {{signupForm.controls.confirmPassword.hasError('hasPasswordmismatch')}} -->
+    <mat-card class="mat-elevation-z0" *ngIf="passwordHasError()" >
+      <mat-error>
+        <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('minlength')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos 8 caracteres.</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('hasNumber')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos um número.</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('hasSpecialCharacter')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos um caractere especial.</span>
+        </span>
+      </mat-error>
+      <!-- <mat-error *ngIf="signupForm.controls.name.invalid && submitted">
+        <span class="errorMessage" *ngIf="signupForm.controls.name.hasError('required')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span> O campo nome é obrigatório.</span>
+        </span>
+      </mat-error> -->
+
+      <!-- <mat-error *ngIf="signupForm.controls.email.invalid && submitted">
+        <span class="errorMessage" *ngIf="signupForm.controls.email.hasError('required')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>O campo email é obrigatório.</span>
+        </span>
+      </mat-error> -->
+      <!-- <mat-error *ngIf="signupForm.controls.password.dirty">
+
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.password.invalid && submitted">
+        <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('required')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>O campo senha é obrigatório</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.name.dirty && signupForm.controls.password.hasError('minlength')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos 8 caracteres.</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.name.dirty && signupForm.controls.password.hasError('hasNumber')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos um número.</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.name.dirty && signupForm.controls.password.hasError('hasSpecialCharacter')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos um caractere especial.</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.confirmPassword.hasError('required') && submitted">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>É necessário confirmar a senha.</span>
+        </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.confirmPassword.hasError('hasPasswordmismatch')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>As senhas não são correspondentes.</span>
+        </span>
+      </mat-error> -->
+
+    </mat-card>
+
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
-      <input matInput placeholder="nome">
+      <input matInput placeholder="nome" formControlName="name">
+
+      <mat-error *ngIf="signupForm.controls.name.hasError('required')">
+        Este campo é obrigatório.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="email@example.com">
+      <input matInput type="email" placeholder="email@example.com" formControlName="email">
+
+      <mat-error *ngIf="signupForm.controls.email.hasError('required')">
+        Este campo é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.email.hasError('invalidEmail')">
+        Email inválido.
+      </mat-error>
     </mat-form-field>
 
+   <!--  <div class="passwordWrapper">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" placeholder="senha" formControlName="password">
+
+
+        <mat-error *ngIf="signupForm.controls.password.hasError('required')">
+          Este campo é obrigatório.
+        </mat-error>
+        <mat-error *ngIf="passwordHasError()">
+          A senha não cumpre os requisitos.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-icon-button matSuffix  matTooltip="A senha deve ter no mínimo 8 caracteres, contendo ao menos um caractere especial (ex.: *&%), uma letra e um número">
+        <mat-icon>help_outline</mat-icon>
+      </button>
+      <mat-icon [inline]="true" matSuffix  matTooltip="A senha deve ter no mínimo 8 caracteres, contendo ao menos um caractere especial (ex.: *&%), uma letra e um número">help_outline</mat-icon>
+    </div> -->
     <mat-form-field appearance="outline">
       <mat-label>Senha</mat-label>
-      <input matInput type="password" placeholder="senha">
+      <input matInput type="password" placeholder="senha" formControlName="password">
+      <mat-error *ngIf="signupForm.controls.password.hasError('required')">
+        Este campo é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="passwordHasError()">
+        A senha não cumpre os requisitos.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Confirmar Senha</mat-label>
-      <input matInput type="password" placeholder="confirmar senha">
+      <input matInput type="password" placeholder="confirmar senha" formControlName="confirmPassword">
+
+      <mat-error *ngIf="signupForm.get('confirmPassword').getError('required')">
+        Este campo é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.confirmPassword.errors?.passwordMismatch">
+        As senhas não são correspondentes.
+      </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button>Registrar</button>
+    <button class="signupButton"  type="submit" mat-raised-button>Registrar</button>
 
     <div class="alreadyRegistered">
       <p>Já possui cadastro? <strong><a  [routerLink]="'/login'">Clique aqui</a></strong></p>
