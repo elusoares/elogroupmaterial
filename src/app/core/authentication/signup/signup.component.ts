@@ -10,6 +10,8 @@ import { CustomFormValidatorService } from '../../services/custom-form-validator
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  hideConfirmPassword: boolean;
+  hidePassword: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private customFormValidatorService: CustomFormValidatorService,
@@ -47,10 +49,11 @@ export class SignupComponent implements OnInit {
       validator: this.customFormValidatorService.MatchPassword('password', 'confirmPassword')
     }
     );
-   }
+    this.hideConfirmPassword = true;
+    this.hidePassword = true;
+  }
 
   ngOnInit(): void {
-    console.log(this.signupForm.controls);
   }
 
   register() {

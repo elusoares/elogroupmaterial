@@ -7,12 +7,22 @@
   <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="email@example.com">
+      <input matInput type="email" placeholder="email@example.com" formControlName="email">
+      <mat-error *ngIf="loginForm.controls.email.hasError('required')">
+        Este campo é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls.email.hasError('invalidEmail')">
+        Email inválido.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Senha</mat-label>
-      <input matInput type="password" placeholder="senha">
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="senha" formControlName="password">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+        Este campo é obrigatório.
+      </mat-error>
     </mat-form-field>
 
     <button mat-raised-button>Login</button>
