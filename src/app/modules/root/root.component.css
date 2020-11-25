@@ -1,10 +1,21 @@
 mat-toolbar {
   background: #13212b;
   color: white;
+  /* faz ficar no topo da pagina: */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .image-responsive {
   height: auto;
+}
+.button-space {
+  padding: 0 14px;
+}
+/* #docregion toolbar-position-content-style */
+.spacer {
+  flex: 1 1 auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -19,5 +30,17 @@ mat-toolbar {
 @media screen and (min-width: 1024px) {
   .image-responsive {
     max-width: 15%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .small-screen-options {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .large-screen-options {
+    display: none;
   }
 }

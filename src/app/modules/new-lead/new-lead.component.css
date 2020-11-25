@@ -36,13 +36,11 @@ mat-card {
   font-weight: bold;
 }
 
-/* .mat-list-option {
-  height: 30px;
+mat-list-option {
+  height: auto !important;
+  margin-top: 10px;
 }
 
-.mat-pseudo-checkbox-checked {
-  background: #13212b;;
-} */
 
 mat-card-title {
   text-align: center;

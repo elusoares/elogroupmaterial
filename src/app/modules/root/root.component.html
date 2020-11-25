@@ -1,6 +1,33 @@
 <mat-toolbar>
-  <mat-toolbar-row>
-    <img class="image-responsive" src="/assets/logo.png" alt="Nature">
-  </mat-toolbar-row>
+  <img class="image-responsive" src="/assets/logo.png" alt="Nature">
+  <span class="spacer"></span>
+  <div class="large-screen-options">
+    <button mat-button class="button-space">
+      <span>Home</span>
+    </button>
+    <button mat-button class="button-space" [matMenuTriggerFor]="profileMenu">
+      <span>Minha Conta</span>
+    </button>
+    <!-- <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item>Configurar</button>
+      <button mat-menu-item>Sair</button>
+    </mat-menu> -->
+  </div>
+  <div class="small-screen-options">
+    <button mat-icon-button class="button-space" [routerLink]="'/leads'">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button class="button-space" [matMenuTriggerFor]="profileMenu">
+      <mat-icon>person</mat-icon>
+    </button>
+    <!-- <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item>Configurar</button>
+      <button mat-menu-item>Sair</button>
+    </mat-menu> -->
+  </div>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item>Configurar</button>
+    <button mat-menu-item>Sair</button>
+  </mat-menu>
 </mat-toolbar>
 <router-outlet></router-outlet>
