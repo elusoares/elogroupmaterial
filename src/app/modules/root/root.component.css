@@ -1,0 +1,23 @@
+mat-toolbar {
+  background: #13212b;
+  color: white;
+}
+
+.image-responsive {
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .image-responsive {
+    max-width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  .image-responsive {
+    max-width: 15%;
+  }
+}
