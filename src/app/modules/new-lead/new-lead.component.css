@@ -39,6 +39,10 @@ mat-card {
 mat-list-option {
   height: auto !important;
   margin-top: 10px;
+
+}
+.mat-list-option {
+  color: #686868;
 }
 
 

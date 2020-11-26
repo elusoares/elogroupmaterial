@@ -1,4 +1,53 @@
-<button mat-flat-button [routerLink]="'/leads/new-lead'">Novo Lead</button>
-<button mat-flat-button (click)="getLead()">mostrar leads</button>
+
+<!-- <button mat-flat-button (click)="getLeads()">mostrar leads</button>
 <button mat-flat-button (click)="setLead()">salvar leads</button>
 <button mat-flat-button (click)="clear()">limpar leads</button>
+ -->
+<button mat-fab class="fab-button-lead" [routerLink]="'/leads/new-lead'">
+  <mat-icon>add</mat-icon>
+</button>
+
+<div class="container">
+  <mat-card class="mat-elevation-z0 mat-card-cp">
+    <mat-card-title>Cliente em Potencial</mat-card-title>
+
+    <mat-card-content>
+      <div
+        cdkDropList
+        #clienteEmPotencialList="cdkDropList"
+        [cdkDropListData]="clienteEmPotencial"
+        [cdkDropListConnectedTo]="[dadosConfirmadosList]"
+        class="example-list"
+        (cdkDropListDropped)="dropLead($event)">
+        <div class="example-box" *ngFor="let cp of clienteEmPotencial" cdkDrag>{{cp.name}}</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z0 mat-card-dc">
+    <mat-card-title>Dados Confirmados</mat-card-title>
+
+    <mat-card-content
+      cdkDropList
+      #dadosConfirmadosList="cdkDropList"
+      [cdkDropListData]="dadosConfirmados"
+      [cdkDropListConnectedTo]="[reuniaoAgendadaList]"
+      class="example-list"
+      (cdkDropListDropped)="dropLead($event)">
+      <div class="example-box" *ngFor="let dc of dadosConfirmados" cdkDrag>{{dc.name}}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z0 mat-card-ra">
+    <mat-card-title>Reunião Agendada</mat-card-title>
+
+    <mat-card-content
+      cdkDropList
+      #reuniaoAgendadaList="cdkDropList"
+      [cdkDropListData]="reuniaoAgendada"
+      class="example-list"
+      (cdkDropListDropped)="dropLead($event)">
+      <div class="example-box" *ngFor="let ra of reuniaoAgendada" cdkDrag>{{ra.name}}</div>
+    </mat-card-content>
+  </mat-card>
+</div>

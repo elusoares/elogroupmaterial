@@ -2,7 +2,12 @@ export interface OpportunityInterface {
   name: string;
 }
 
-export const enum Status {
+export interface LeadsCollumns {
+  field: string;
+  header: string;
+}
+
+export const enum LeadStatus {
   clienteEmPotencial = 'CP',
   dadosConfirmados = 'DC',
   reuniaoAgendada = 'RA'

@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CustomFormValidatorService } from 'src/app/core/services/custom-form-validator.service';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { LeadModel, OpportunityInterface, Status } from './lead-model';
+import { LeadModel, OpportunityInterface, LeadStatus } from './lead-model';
 
 export interface Task {
   name: string;
@@ -63,7 +63,7 @@ export class NewLeadComponent implements OnInit {
         this.newLeadForm.get('phone').value,
         this.newLeadForm.get('email').value,
         this.newLeadForm.get('selectedOpportunities').value,
-        Status.clienteEmPotencial
+        LeadStatus.clienteEmPotencial
       );
       this.storageService.saveLead(this.newLead);
       this.openSnackBar('Lead incluído com sucesso', 'fechar');
