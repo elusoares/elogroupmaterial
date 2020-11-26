@@ -36,10 +36,6 @@ mat-card {
   background: #13212b;
   color: white;
 }
-/*
-.passwordWrapper {
-  display: inline-flex;
-} */
 
 .mat-form-field {
   display: block;

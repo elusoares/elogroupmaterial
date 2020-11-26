@@ -56,9 +56,10 @@ mat-card-content {
   margin-top: 20px;
 }
 
-.example-box {
+.lead-box {
   padding: 10px 10px;
   border-bottom: solid 1px #ccc;
+  border-radius: 4px;
   color: #13212B;
   display: flex;
   flex-direction: row;
@@ -69,7 +70,6 @@ mat-card-content {
   background: white;
   font-size: 14px;
   margin: 10px;
-  border-radius: 4px;
 }
 
 .fab-button-lead {

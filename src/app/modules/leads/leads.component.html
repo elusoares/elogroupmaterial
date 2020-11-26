@@ -17,9 +17,9 @@
         #clienteEmPotencialList="cdkDropList"
         [cdkDropListData]="clienteEmPotencial"
         [cdkDropListConnectedTo]="[dadosConfirmadosList]"
-        class="example-list"
+        class="lead-list"
         (cdkDropListDropped)="dropLead($event)">
-        <div class="example-box" *ngFor="let cp of clienteEmPotencial" cdkDrag>{{cp.name}}</div>
+        <div class="lead-box" *ngFor="let cp of clienteEmPotencial" cdkDrag>{{cp.name}}</div>
       </div>
     </mat-card-content>
   </mat-card>
@@ -32,9 +32,9 @@
       #dadosConfirmadosList="cdkDropList"
       [cdkDropListData]="dadosConfirmados"
       [cdkDropListConnectedTo]="[reuniaoAgendadaList]"
-      class="example-list"
+      class="lead-list"
       (cdkDropListDropped)="dropLead($event)">
-      <div class="example-box" *ngFor="let dc of dadosConfirmados" cdkDrag>{{dc.name}}</div>
+      <div class="lead-box" *ngFor="let dc of dadosConfirmados" cdkDrag>{{dc.name}}</div>
     </mat-card-content>
   </mat-card>
 
@@ -45,9 +45,9 @@
       cdkDropList
       #reuniaoAgendadaList="cdkDropList"
       [cdkDropListData]="reuniaoAgendada"
-      class="example-list"
+      class="lead-list"
       (cdkDropListDropped)="dropLead($event)">
-      <div class="example-box" *ngFor="let ra of reuniaoAgendada" cdkDrag>{{ra.name}}</div>
+      <div class="lead-box" *ngFor="let ra of reuniaoAgendada" cdkDrag>{{ra.name}}</div>
     </mat-card-content>
   </mat-card>
 </div>

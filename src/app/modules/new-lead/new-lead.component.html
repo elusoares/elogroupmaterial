@@ -3,10 +3,10 @@
   <div class="title">
     <p>Incluir Lead</p>
   </div>
+
   <form class="form" [formGroup]="newLeadForm" (ngSubmit)="saveLead()">
-    <!-- <div class="inputs-opps-container">
-      <div class="inputs"> -->
-        <mat-form-field appearance="outline">
+
+        <mat-form-field appearance="legacy">
           <mat-label>Nome</mat-label>
           <input matInput placeholder="nome" formControlName="name">
           <mat-error *ngIf="newLeadForm.controls.name.hasError('required')">
@@ -14,7 +14,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="legacy">
           <mat-label>Telefone</mat-label>
           <input matInput placeholder="phone" formControlName="phone" mask="(00) 00000-0000">
           <mat-error *ngIf="newLeadForm.controls.name.hasError('required')">
@@ -22,7 +22,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="legacy">
           <mat-label>Email</mat-label>
           <input matInput type="email" placeholder="email@example.com" formControlName="email">
           <mat-error *ngIf="newLeadForm.controls.email.hasError('required')">
@@ -33,9 +33,7 @@
           </mat-error>
         </mat-form-field>
 
-      <!-- </div> -->
-
-      <mat-card class="mat-elevation-z0" [ngClass]="{'mat-card-error':newLeadForm.controls.selectedOpportunities.hasError('required') && (submitted || newLeadForm.controls.selectedOpportunities.dirty)}">
+      <!-- <mat-card class="mat-elevation-z0" [ngClass]="{'mat-card-error':newLeadForm.controls.selectedOpportunities.hasError('required') && (submitted || newLeadForm.controls.selectedOpportunities.dirty)}">
         <mat-card-title>Oportunidades</mat-card-title>
         <mat-card-content>
           <mat-selection-list #opport formControlName="selectedOpportunities">
@@ -48,9 +46,21 @@
       </mat-card>
       <mat-error *ngIf="newLeadForm.controls.selectedOpportunities.hasError('required')&& (submitted || newLeadForm.controls.selectedOpportunities.dirty)">
         Este campo é obrigatório.
+      </mat-error> -->
+      <div class="opportunity-box"  [ngClass]="{'mat-card-error':newLeadForm.controls.selectedOpportunities.hasError('required') && (submitted || newLeadForm.controls.selectedOpportunities.dirty)}">
+        <div class="opportunity-title">
+          <span>Oportunidades</span>
+        </div>
+          <mat-selection-list #opport formControlName="selectedOpportunities">
+           <mat-checkbox (change)="selectAll($event, opport)"> Selecionar todos</mat-checkbox>
+           <mat-list-option  class="mat-primary" [checkboxPosition]="'before'" *ngFor="let opportunity of opportunities" [value]="opportunity">
+             {{opportunity.name}}
+           </mat-list-option>
+          </mat-selection-list>
+      </div>
+      <mat-error *ngIf="newLeadForm.controls.selectedOpportunities.hasError('required')&& (submitted || newLeadForm.controls.selectedOpportunities.dirty)">
+        Este campo é obrigatório.
       </mat-error>
-
-    <!-- </div> -->
     <button class="signupButton"  type="submit" mat-raised-button>Salvar</button>
 
   </form>
