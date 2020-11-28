@@ -96,34 +96,74 @@ mat-card-title {
   }
 }
  */
+
+ .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+
+
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  justify-content: center;
+}
+
 form {
   margin-left: auto;
   margin-right: auto;
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%); */
 }
+
 .mat-form-field {
-  display: block;
+  display: inline;
 }
 .title {
   text-align: center;
   color: #13212b;
 }
 
-.opportunity-error {
-  border-color: red;
+.opportunity-wrapper {
+  margin-bottom: .25em;
+  padding-bottom: 1.25em;
+  position: relative;
 }
 
 .opportunity-box {
-  border: 1px;
-  border-style: solid;
-  border-color: #ececec;
-  border-radius: 4px;
   color: #686868;
-  margin-top: 1.25em;
   padding: 15px;
 }
 
+.opportunity-border-error {
+  border: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  border-color: #f44336;
+}
+
+.opportunity-border {
+  border: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  border-color: #ececec;
+}
+
+.opportunity-box + mat-error {
+  font-size: 75%;
+  line-height: 1.125;
+  position: absolute;
+  margin-top: .5416666667em;
+}
 .opportunity-title {
   text-align: center;
+}
+
+mat-selection-list {
+  display: inline;
 }
 
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
@@ -138,7 +178,6 @@ form {
   height: auto !important;
   margin-top: 5px;
   color: #686868;
-
 }
 
 mat-input-element {
@@ -153,28 +192,23 @@ mat-input-element {
   width: 100%;
   background: #13212b;
   color: white;
-  margin-top: 20px;
 }
 
-@media screen and (min-width: 768px) {
-  /* form {
-  width: 350px;
-  } */
-
+@media screen and (max-width: 767px) {
+  .form {
+    width: 300px;
+  }
   .title {
-    margin-top: 25px;
-    font-size: 25px;
+    font-size: 18px;
+    font-weight: 500;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
+
   .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -45%);
-    width: 70%;
     height: 80%;
+    width: 50%;
     border: solid 1px #ccc;
     border-radius: 4px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -182,5 +216,9 @@ mat-input-element {
 
   .form {
     width: 250px;
+  }
+
+  .title {
+    font-size: 25px;
   }
 }

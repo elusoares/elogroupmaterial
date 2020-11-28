@@ -18,7 +18,7 @@ mat-toolbar {
   flex: 1 1 auto;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .image-responsive {
     max-width: 40%;
     margin-left: auto;
@@ -31,16 +31,25 @@ mat-toolbar {
   .image-responsive {
     max-width: 15%;
   }
-}
+} */
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 600px) {
   .small-screen-options {
     display: none;
   }
+
+  .image-responsive {
+    max-width: 15%;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 601px) {
   .large-screen-options {
     display: none;
+  }
+  .image-responsive {
+    max-width: 40%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

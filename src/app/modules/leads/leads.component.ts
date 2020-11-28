@@ -1,6 +1,7 @@
 import { LeadModel, LeadsCollumns, LeadStatus } from './../new-lead/lead-model';
 import { Component, OnInit } from '@angular/core';
 import { StorageKeys, StorageService } from 'src/app/core/services/storage.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-leads',
@@ -12,19 +13,35 @@ export class LeadsComponent implements OnInit {
   clienteEmPotencial: LeadModel[];
   dadosConfirmados: LeadModel[];
   reuniaoAgendada: LeadModel[];
+  todo = [
+    'Get to work',
+    'Pick up groceries',
+    'Go home',
+    'Fall asleep'
+  ];
 
-  leadsCols: LeadsCollumns[];
+  done = [
+    'Get up',
+    'Brush teeth',
+    'Take a shower',
+    'Check e-mail',
+    'Walk dog'
+  ];
+  // leadsCols: LeadsCollumns[];
+  // items = Array.from({length: 100}).map((_, i) => `Item #${i}`);
+  loaded: boolean;
   constructor(
     private storageService: StorageService,
   ) {
-    this.leadsCols = [
+    /* this.leadsCols = [
       { field: LeadStatus.clienteEmPotencial, header: 'Cliente em Potencial' },
       { field: LeadStatus.dadosConfirmados, header: 'Dados Confirmados' },
       { field: LeadStatus.reuniaoAgendada, header: 'Reunião Agendada' }
-    ];
+    ]; */
     this.clienteEmPotencial = [];
     this.dadosConfirmados = [];
     this.reuniaoAgendada = [];
+    this.loaded = false;
   }
 
   ngOnInit(): void {
@@ -66,8 +83,21 @@ export class LeadsComponent implements OnInit {
     this.storageService.clear();
   }
 
-  dropLead(event) {
-
+  dropLead(event: CdkDragDrop<string[]>) {
+    /* console.log(event.previousContainer.connectedTo);
+    console.log(event.container); */
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log('passou if');
+    } else {
+      console.log('passou else');
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
 }
