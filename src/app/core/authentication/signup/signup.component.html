@@ -19,6 +19,10 @@
           <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
           <span>A senha deve conter ao menos um caractere especial.</span>
         </span>
+        <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('hasLetter')">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>A senha deve conter ao menos uma letra.</span>
+        </span>
       </mat-error>
     </mat-card>
 

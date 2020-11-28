@@ -13,35 +13,13 @@ export class LeadsComponent implements OnInit {
   clienteEmPotencial: LeadModel[];
   dadosConfirmados: LeadModel[];
   reuniaoAgendada: LeadModel[];
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
 
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-  // leadsCols: LeadsCollumns[];
-  // items = Array.from({length: 100}).map((_, i) => `Item #${i}`);
-  loaded: boolean;
   constructor(
     private storageService: StorageService,
   ) {
-    /* this.leadsCols = [
-      { field: LeadStatus.clienteEmPotencial, header: 'Cliente em Potencial' },
-      { field: LeadStatus.dadosConfirmados, header: 'Dados Confirmados' },
-      { field: LeadStatus.reuniaoAgendada, header: 'Reunião Agendada' }
-    ]; */
     this.clienteEmPotencial = [];
     this.dadosConfirmados = [];
     this.reuniaoAgendada = [];
-    this.loaded = false;
   }
 
   ngOnInit(): void {
@@ -55,7 +33,6 @@ export class LeadsComponent implements OnInit {
       this.savedLeads = [...temp];
       this.sortLeads();
     }
-    console.log(this.savedLeads);
   }
 
   sortLeads() {
@@ -66,26 +43,16 @@ export class LeadsComponent implements OnInit {
         this.dadosConfirmados = [...this.dadosConfirmados, lead];
       } else if (lead.status === LeadStatus.reuniaoAgendada) {
         this.reuniaoAgendada = [...this.reuniaoAgendada, lead];
-
       }
     }
-    console.log(this.clienteEmPotencial);
-    console.log(this.dadosConfirmados);
-    console.log(this.reuniaoAgendada);
-  }
-
-
-  setLead() {
-    // this.storageService.saveLead();
   }
 
   clear() {
     this.storageService.clear();
   }
 
-  dropLead(event: CdkDragDrop<string[]>) {
-    /* console.log(event.previousContainer.connectedTo);
-    console.log(event.container); */
+  // essa funçao
+  dropLead(event: CdkDragDrop<LeadModel[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       console.log('passou if');
@@ -97,7 +64,17 @@ export class LeadsComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+
+      if (event.container.id === LeadStatus.dadosConfirmados) {
+        this.dadosConfirmados[event.currentIndex].status = LeadStatus.dadosConfirmados;
+      } else if (event.container.id === LeadStatus.reuniaoAgendada) {
+        this.reuniaoAgendada[event.currentIndex].status = LeadStatus.reuniaoAgendada;
+      }
     }
+    let newSavedLeads: LeadModel[] = [];
+    newSavedLeads = [...this.clienteEmPotencial, ...this.dadosConfirmados, ...this.reuniaoAgendada];
+    console.log(newSavedLeads);
+    // this.storageService.replaceLeads(newSavedLeads);
   }
 
 }

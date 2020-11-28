@@ -3,7 +3,7 @@
 <button mat-flat-button (click)="setLead()">salvar leads</button>
 <button mat-flat-button (click)="clear()">limpar leads</button>
  -->
-<button mat-fab class="fab-button-lead" [routerLink]="'/leads/new-lead'">
+ <button mat-fab class="fab-button-lead" [routerLink]="'/leads/new-lead'">
   <mat-icon>add</mat-icon>
 </button>
 
@@ -13,20 +13,9 @@
 
     <mat-card-content>
       <cdk-virtual-scroll-viewport itemSize="50" class="card-scroll">
-        <!-- <div
-          cdkDropList
-          #clienteEmPotencialList="cdkDropList"
-          [cdkDropListData]="clienteEmPotencial"
-          [cdkDropListConnectedTo]="[dadosConfirmadosList]"
-          class="lead-list"
-          (cdkDropListDropped)="dropLead($event)">
-          <div class="lead-box" *cdkVirtualFor="let cp of clienteEmPotencial" cdkDrag>
-            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-            {{cp.name}}
-          </div>
-        </div> -->
         <div
           cdkDropList
+          id="CP"
           #clienteEmPotencialList="cdkDropList"
           [cdkDropListData]="clienteEmPotencial"
           [cdkDropListConnectedTo]="[dadosConfirmadosList]"
@@ -44,23 +33,15 @@
     <mat-card-title>Dados Confirmados</mat-card-title>
     <mat-card-content>
       <cdk-virtual-scroll-viewport itemSize="50" class="card-scroll">
-        <!-- <div
-          cdkDropList
-          #dadosConfirmadosList="cdkDropList"
-          [cdkDropListData]="dadosConfirmados"
-          [cdkDropListConnectedTo]="[reuniaoAgendadaList]"
-          class="lead-list"
-          (cdkDropListDropped)="dropLead($event)">
-          <div class="lead-box" *ngFor="let dc of dadosConfirmados" cdkDrag>{{dc.name}}</div>
-        </div> -->
         <div
           cdkDropList
+          id="DC"
           #dadosConfirmadosList="cdkDropList"
           [cdkDropListData]="dadosConfirmados"
           [cdkDropListConnectedTo]="[reuniaoAgendadaList]"
           class="lead-list"
           (cdkDropListDropped)="dropLead($event)">
-          <div class="example-box" *ngFor="let item of dadosConfirmados" cdkDrag>{{item.name}}</div>
+          <div class="lead-box" *ngFor="let item of dadosConfirmados" cdkDrag>{{item.name}}</div>
         </div>
       </cdk-virtual-scroll-viewport>
     </mat-card-content>
@@ -73,6 +54,7 @@
         <cdk-virtual-scroll-viewport itemSize="50" class="card-scroll">
           <div
             cdkDropList
+            id="RA"
             #reuniaoAgendadaList="cdkDropList"
             [cdkDropListData]="reuniaoAgendada"
             class="lead-list"
@@ -82,33 +64,6 @@
       </cdk-virtual-scroll-viewport>
     </mat-card-content>
   </mat-card>
+
+
 </div>
-
-
-<!-- <div class="example-container">
-  <h2>To do</h2>
-
-  <div
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="clienteEmPotencial"
-    [cdkDropListConnectedTo]="[doneList]"
-    class="example-list"
-    (cdkDropListDropped)="dropLead($event)">
-    <div class="example-box" *ngFor="let item of clienteEmPotencial" cdkDrag>{{item.name}}</div>
-  </div>
-</div> -->
-<!--
-<div class="example-container">
-  <h2>Done</h2>
-
-  <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="dadosConfirmados"
-    [cdkDropListConnectedTo]="[todoList]"
-    class="example-list"
-    (cdkDropListDropped)="dropLead($event)">
-    <div class="example-box" *ngFor="let item of dadosConfirmados" cdkDrag>{{item.name}}</div>
-  </div>
-</div> -->

@@ -23,7 +23,7 @@ export class StorageService {
   }
 
   // salva uma nova lead.
-  saveLead(lead: LeadModel) {
+  saveOneLead(lead: LeadModel) {
     // antes de salvar, verificar se ja existe um array de leads com a key 'leads'.
     // se já existir, a nova lead será iterada ao array existente.
     // se nao existir, será criado um novo registro.
@@ -49,9 +49,14 @@ export class StorageService {
     }
   }
 
-  // recupera os leads salvos
+  // recupera as leads salvas
   getLeads(): LeadModel[] {
     return JSON.parse(this.localStorage.getItem(StorageKeys.leads));
+  }
+
+  // em leadsComponent, vai ser necessario subscrever todas as leads
+  replaceLeads(leads: LeadModel[]) {
+    this.localStorage.setItem(StorageKeys.leads, JSON.stringify(leads));
   }
 
   // limpa tudo no localstorage

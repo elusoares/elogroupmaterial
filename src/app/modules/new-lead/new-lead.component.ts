@@ -65,7 +65,7 @@ export class NewLeadComponent implements OnInit {
         this.newLeadForm.get('selectedOpportunities').value,
         LeadStatus.clienteEmPotencial
       );
-      this.storageService.saveLead(this.newLead);
+      this.storageService.saveOneLead(this.newLead);
       this.openSnackBar('Lead incluído com sucesso', 'fechar');
       this.router.navigateByUrl('/leads');
     }
