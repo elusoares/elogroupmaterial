@@ -5,12 +5,16 @@
     <button mat-button class="button-space" [routerLink]="'/leads'">
       <span>Home</span>
     </button>
-    <button mat-button class="button-space" [routerLink]="'/leads/new-lead'">
+    <button mat-button class="button-space" [routerLink]="'/new-lead'">
       <span>Novo Lead</span>
     </button>
     <button mat-button class="button-space" [matMenuTriggerFor]="profileMenu">
       <span>Minha Conta</span>
     </button>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/user'">Configurar</button>
+      <button mat-menu-item>Sair</button>
+    </mat-menu>
   </div>
   <div class="small-screen-options">
     <button mat-icon-button class="button-space" [routerLink]="'/leads'">
@@ -20,9 +24,6 @@
       <mat-icon>person</mat-icon>
     </button>
   </div>
-  <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item>Configurar</button>
-    <button mat-menu-item>Sair</button>
-  </mat-menu>
+
 </mat-toolbar>
 <router-outlet></router-outlet>

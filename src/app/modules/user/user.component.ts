@@ -1,32 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CustomFormValidatorService } from '../../services/custom-form-validator.service';
+import { CustomFormValidatorService } from 'src/app/core/services/custom-form-validator.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class SignupComponent implements OnInit {
-  signupForm: FormGroup;
-  // essas variaveis 'hide' sao para controlar o botao de mostrar/esconder a senha.
-  // eu peguei isso de https://fireflysemantics.medium.com/angular-material-password-field-with-visibilitytoggle-d5342f97afbe
-  hideConfirmPassword: boolean;
+export class UserComponent implements OnInit {
+  userForm: FormGroup;
   hidePassword: boolean;
+  hideNewPassword: boolean;
+  hideConfirmPassword: boolean;
+
   constructor(
     private formBuilder: FormBuilder,
     private customFormValidatorService: CustomFormValidatorService,
-    private router: Router
   ) {
-    this.signupForm = this.formBuilder.group({
+    this.userForm = this.formBuilder.group({
       name: new FormControl('', Validators.required),
       email: new FormControl('', [
         Validators.required,
         this.customFormValidatorService.patternValidator(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, { invalidEmail: true })
       ]),
-      password: new FormControl('', [
-        // 1. Password Field is Required
+      password: new FormControl('', Validators.required),
+      newPassword: new FormControl('', [
+        // 1. New password Field is Required
         Validators.required,
         // 2. Has a minimum length of 8 characters
         Validators.minLength(8),
@@ -40,33 +39,27 @@ export class SignupComponent implements OnInit {
       confirmPassword: new FormControl('', Validators.required)
     },
     {
-      // check whether password and confirm password match.
+      // check whether password and confirm password match
       // I don't understand why this validator is added here instead of
-      // confirmPassword control.
+      // to the confirmPassword control.
+      // validator: this.customFormValidatorService.passwordMatchValidator
       validator: this.customFormValidatorService.matchPassword('password', 'confirmPassword')
     }
     );
-    this.hideConfirmPassword = true;
     this.hidePassword = true;
-  }
+    this.hideNewPassword = true;
+    this.hideConfirmPassword = true;
+   }
 
   ngOnInit(): void {
   }
 
-  register() {
-    if (this.signupForm.valid) {
-      console.log('form valido');
-      this.router.navigateByUrl('/login');
-    } else {
-      console.log('form invalido');
-    }
+  saveUser() {
 
   }
 
-  // criei essa função para mostrar um único aviso embaixo do input de password.
-  // os avisos de erros específicos (tamanho minimo de 8, caractere especial etc) ficam na parte superior do form
-  passwordHasError() {
-    let passwordControl = this.signupForm.get('password');
+  newPasswordHasError() {
+    let passwordControl = this.userForm.get('newPassword');
     if (
       passwordControl.hasError('minlength') ||
       passwordControl.hasError('hasNumber') ||

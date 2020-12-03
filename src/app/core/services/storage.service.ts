@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { LeadModel } from 'src/app/modules/new-lead/lead-model';
+import { UserModel } from 'src/app/modules/user/user-model';
 
 export const enum StorageKeys {
   leads = 'leads',
-  users = 'users'
+  users = 'users',
+  currentUser = 'currentUser'
 }
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class StorageService {
     // depois de receber o resultado da inscricao do metodo get. Nao entendo muito de rxjs,
     // mas em outros momentos eu usei pipe, map e switchMap e funcionou. Mas nessa lib
     // nao, entao desinstalei.
-    // Nao fiz tratamento de erros pq nao tem tempo pra isso agora
+    // peguei a ideia de https://firstclassjs.com/persist-data-using-local-storage-and-angular/
     this.localStorage = window.localStorage;
   }
 
@@ -57,6 +59,15 @@ export class StorageService {
   // em leadsComponent, vai ser necessario subscrever todas as leads
   replaceLeads(leads: LeadModel[]) {
     this.localStorage.setItem(StorageKeys.leads, JSON.stringify(leads));
+  }
+
+  saveOneUser() {
+
+  }
+
+  // recupera os users salvos
+  getUsers(): UserModel[] {
+    return JSON.parse(this.localStorage.getItem(StorageKeys.users));
   }
 
   // limpa tudo no localstorage

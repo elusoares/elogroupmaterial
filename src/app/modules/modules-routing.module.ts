@@ -4,17 +4,26 @@ import { RootComponent } from './root/root.component';
 
 
 const routes: Routes = [
+  /* {
+    path: '',
+    redirectTo: '/leads',
+    pathMatch: 'full'
+  }, */
   {
-    path: 'leads',
+    path: '',
     component: RootComponent,
     children: [
       {
-        path: '',
+        path: 'leads',
         loadChildren: () => import ('./leads/leads.module').then( m => m.LeadsModule)
       },
       {
         path: 'new-lead',
         loadChildren: () => import ('./new-lead/new-lead.module').then( m => m.NewLeadModule)
+      },
+      {
+        path: 'user',
+        loadChildren: () => import ('./user/user.module').then( m => m.UserModule)
       }
     ]
   }

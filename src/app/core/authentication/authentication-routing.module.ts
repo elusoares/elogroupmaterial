@@ -7,7 +7,7 @@ const routes: Routes = [
   // então para não precisar criar um guard, achei que isso fosse mais prático
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/leads',
     pathMatch: 'full'
   },
   {

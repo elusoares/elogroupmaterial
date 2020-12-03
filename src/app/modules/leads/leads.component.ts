@@ -1,4 +1,4 @@
-import { LeadModel, LeadsCollumns, LeadStatus } from './../new-lead/lead-model';
+import { LeadModel, LeadStatus } from './../new-lead/lead-model';
 import { Component, OnInit } from '@angular/core';
 import { StorageKeys, StorageService } from 'src/app/core/services/storage.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -74,7 +74,7 @@ export class LeadsComponent implements OnInit {
     let newSavedLeads: LeadModel[] = [];
     newSavedLeads = [...this.clienteEmPotencial, ...this.dadosConfirmados, ...this.reuniaoAgendada];
     console.log(newSavedLeads);
-    // this.storageService.replaceLeads(newSavedLeads);
+    this.storageService.replaceLeads(newSavedLeads);
   }
 
 }
