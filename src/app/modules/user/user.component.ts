@@ -43,7 +43,7 @@ export class UserComponent implements OnInit {
       // I don't understand why this validator is added here instead of
       // to the confirmPassword control.
       // validator: this.customFormValidatorService.passwordMatchValidator
-      validator: this.customFormValidatorService.matchPassword('password', 'confirmPassword')
+      matchPasswordvalidator: this.customFormValidatorService.matchPasswordValidator('password', 'confirmPassword')
     }
     );
     this.hidePassword = true;

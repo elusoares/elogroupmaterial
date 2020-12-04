@@ -4,7 +4,7 @@ import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angu
 @Injectable({
   providedIn: 'root'
 })
-// fiz com base nesses exemplos:
+// utilizei esses exemplos:
 // https://www.freecodecamp.org/news/how-to-validate-angular-reactive-forms/
 // https://codinglatte.com/posts/angular/cool-password-validation-angular/
 export class CustomFormValidatorService {
@@ -25,14 +25,16 @@ export class CustomFormValidatorService {
     };
   }
 
-  matchPassword(password: string, confirmPassword: string) {
+  matchPasswordValidator(password: string, confirmPassword: string) {
+    console.log(password);
     return (formGroup: FormGroup) => {
       const passwordControl = formGroup.controls[password];
       const confirmPasswordControl = formGroup.controls[confirmPassword];
 
-      if (!passwordControl || !confirmPasswordControl) {
+      /* if (!passwordControl || !confirmPasswordControl) {
+        console.log('nao password')
         return null;
-      }
+      } */
 
       if (confirmPasswordControl.errors && !confirmPasswordControl.errors.passwordMismatch) {
         return null;
@@ -42,6 +44,16 @@ export class CustomFormValidatorService {
         confirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         confirmPasswordControl.setErrors(null);
+      }
+    };
+  }
+
+  takenUserValidator(error: boolean, email: string) {
+    console.log(error);
+    return (formGroup: FormGroup) => {
+      const emailControl = formGroup.controls[email];
+      if (error) {
+        emailControl.setErrors({takenUser: true});
       }
     };
   }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/modules/user/user-model';
 import { CustomFormValidatorService } from '../../services/custom-form-validator.service';
+import { FakeBackendService } from '../../services/fake-backend.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,9 +16,11 @@ export class SignupComponent implements OnInit {
   // eu peguei isso de https://fireflysemantics.medium.com/angular-material-password-field-with-visibilitytoggle-d5342f97afbe
   hideConfirmPassword: boolean;
   hidePassword: boolean;
+  takenUserError: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private customFormValidatorService: CustomFormValidatorService,
+    private fakeBackendService: FakeBackendService,
     private router: Router
   ) {
     this.signupForm = this.formBuilder.group({
@@ -39,15 +43,22 @@ export class SignupComponent implements OnInit {
       ]),
       confirmPassword: new FormControl('', Validators.required)
     },
-    {
+    /* {
       // check whether password and confirm password match.
       // I don't understand why this validator is added here instead of
       // confirmPassword control.
-      validator: this.customFormValidatorService.matchPassword('password', 'confirmPassword')
-    }
+      validator: this.customFormValidatorService.matchPasswordValidator('password', 'confirmPassword')
+    }, */
     );
+    // this.signupForm.
     this.hideConfirmPassword = true;
     this.hidePassword = true;
+    this.takenUserError = false;
+    this.signupForm.setValidators(Validators.compose([
+      this.customFormValidatorService.matchPasswordValidator('password', 'confirmPassword'),
+      this.customFormValidatorService.takenUserValidator(this.takenUserError, 'email')
+    ])
+    );
   }
 
   ngOnInit(): void {
@@ -56,7 +67,19 @@ export class SignupComponent implements OnInit {
   register() {
     if (this.signupForm.valid) {
       console.log('form valido');
-      this.router.navigateByUrl('/login');
+      let newUser: UserModel = new UserModel(
+        this.signupForm.get('name').value,
+        this.signupForm.get('email').value,
+        this.signupForm.get('password').value,
+        []
+      );
+      this.fakeBackendService.register(newUser).subscribe((res) => {
+        this.router.navigateByUrl('/login');
+      },
+      (error) => {
+        console.log(error);
+        this.takenUserError = true;
+      });
     } else {
       console.log('form invalido');
     }
@@ -66,7 +89,7 @@ export class SignupComponent implements OnInit {
   // criei essa função para mostrar um único aviso embaixo do input de password.
   // os avisos de erros específicos (tamanho minimo de 8, caractere especial etc) ficam na parte superior do form
   passwordHasError() {
-    let passwordControl = this.signupForm.get('password');
+    const passwordControl = this.signupForm.get('password');
     if (
       passwordControl.hasError('minlength') ||
       passwordControl.hasError('hasNumber') ||

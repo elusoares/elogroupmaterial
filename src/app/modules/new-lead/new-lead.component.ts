@@ -24,7 +24,6 @@ export class NewLeadComponent implements OnInit {
   submitted: boolean;
   opportunities: OpportunityInterface[];
   selectedOpportunities: OpportunityInterface[];
-  newLead: LeadModel;
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
   constructor(
@@ -58,18 +57,18 @@ export class NewLeadComponent implements OnInit {
   saveLead() {
     this.submitted = true;
     if (this.newLeadForm.valid) {
-      this.newLead = new LeadModel(
+    let newLead: LeadModel  = new LeadModel(
         this.newLeadForm.get('name').value,
         this.newLeadForm.get('phone').value,
         this.newLeadForm.get('email').value,
         this.newLeadForm.get('selectedOpportunities').value,
         LeadStatus.clienteEmPotencial
-      );
-      this.storageService.saveOneLead(this.newLead);
-      this.openSnackBar('Lead incluído com sucesso', 'fechar');
-      this.router.navigateByUrl('/leads');
+    );
+    this.storageService.saveOneLead(newLead);
+    this.openSnackBar('Lead incluído com sucesso', 'fechar');
+    this.router.navigateByUrl('/leads');
+    console.log(newLead);
     }
-    console.log(this.newLead);
   }
 
   selectAll(event: MatCheckboxChange, options: MatSelectionList) {

@@ -5,7 +5,7 @@
     <p>Crie uma conta</p>
   </div>
   <form class="form" [formGroup]="signupForm" (ngSubmit)="register()">
-    <mat-card class="mat-elevation-z0" *ngIf="passwordHasError()" >
+    <mat-card class="mat-elevation-z0" *ngIf="passwordHasError() || takenUserError" >
       <mat-error>
         <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('minlength')">
           <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
@@ -22,6 +22,10 @@
         <span class="errorMessage" *ngIf="signupForm.controls.password.hasError('hasLetter')">
           <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
           <span>A senha deve conter ao menos uma letra.</span>
+        </span>
+        <span class="errorMessage" *ngIf="takenUserError">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>Este usuário já existe.</span>
         </span>
       </mat-error>
     </mat-card>
@@ -43,7 +47,7 @@
       <mat-error *ngIf="signupForm.controls.email.hasError('invalidEmail')">
         Email inválido.
       </mat-error>
-    </mat-form-field>
+      </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Senha</mat-label>
