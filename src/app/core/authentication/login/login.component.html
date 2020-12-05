@@ -5,6 +5,14 @@
     <p>Bem-Vindo</p>
   </div>
   <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-card class="mat-elevation-z0" *ngIf="loginError" >
+      <mat-error>
+        <span class="errorMessage">
+          <mat-icon class="errorIcon" [inline]="true">highlight_off</mat-icon>
+          <span>Usuário ou senha incorretos.</span>
+        </span>
+      </mat-error>
+    </mat-card>
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput type="email" placeholder="email@example.com" formControlName="email">

@@ -86,6 +86,17 @@ export class StorageService {
     this.localStorage.setItem(StorageKeys.users, JSON.stringify(users));
   }
 
+  getCurrentUser(): UserModel {
+    return JSON.parse(this.localStorage.getItem(StorageKeys.currentUser));
+  }
+
+  saveCurrentUser(user: UserModel) {
+    this.localStorage.setItem(StorageKeys.currentUser, JSON.stringify(user));
+  }
+
+  deleteCurrentUser() {
+    this.localStorage.removeItem(StorageKeys.currentUser);
+  }
   // limpa tudo no localstorage
   clear() {
     this.localStorage.clear();

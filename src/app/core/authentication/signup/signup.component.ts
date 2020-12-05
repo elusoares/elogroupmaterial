@@ -42,23 +42,11 @@ export class SignupComponent implements OnInit {
         this.customFormValidatorService.patternValidator(/[A-Za-z]/, { hasLetter: true })
       ]),
       confirmPassword: new FormControl('', Validators.required)
-    },
-    /* {
-      // check whether password and confirm password match.
-      // I don't understand why this validator is added here instead of
-      // confirmPassword control.
-      validator: this.customFormValidatorService.matchPasswordValidator('password', 'confirmPassword')
-    }, */
-    );
-    // this.signupForm.
+    });
     this.hideConfirmPassword = true;
     this.hidePassword = true;
     this.takenUserError = false;
-    this.signupForm.setValidators(Validators.compose([
-      this.customFormValidatorService.matchPasswordValidator('password', 'confirmPassword'),
-      this.customFormValidatorService.takenUserValidator(this.takenUserError, 'email')
-    ])
-    );
+    this.signupForm.setValidators(this.customFormValidatorService.matchPasswordValidator('password', 'confirmPassword'));
   }
 
   ngOnInit(): void {
@@ -73,7 +61,7 @@ export class SignupComponent implements OnInit {
         this.signupForm.get('password').value,
         []
       );
-      this.fakeBackendService.register(newUser).subscribe((res) => {
+      this.fakeBackendService.signup(newUser).subscribe((res) => {
         this.router.navigateByUrl('/login');
       },
       (error) => {

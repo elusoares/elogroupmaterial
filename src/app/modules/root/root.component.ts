@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FakeBackendService } from 'src/app/core/services/fake-backend.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RootComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private fakeBackendService: FakeBackendService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.fakeBackendService.logout();
+    this.router.navigateByUrl('/login');
   }
 
 }

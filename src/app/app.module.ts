@@ -19,8 +19,8 @@ import { FakeBackendInterceptor } from './core/interceptors/fake-backend.interce
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
-    ModulesModule
+    ModulesModule,
+    CoreModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true }

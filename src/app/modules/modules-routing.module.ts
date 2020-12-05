@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthenticationGuard } from '../core/guards/authentication.guard';
 import { RootComponent } from './root/root.component';
 
 
 const routes: Routes = [
-  /* {
+  {
     path: '',
     redirectTo: '/leads',
     pathMatch: 'full'
-  }, */
+  },
   {
     path: '',
     component: RootComponent,
+    canActivate: [AuthenticationGuard],
     children: [
       {
         path: 'leads',

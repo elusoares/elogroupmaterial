@@ -42,6 +42,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       // respond 200 OK
       return of(new HttpResponse({ status: 200 }));
     }
+
+    // authenticate
+    if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
+      let requestBody: UserModel = request.body as UserModel;
+      // find if any user matches login credentials
+      let filteredUsers = users.filter(user => {
+          return user.email === requestBody.email && user.password === requestBody.password;
+      });
+
+      if (filteredUsers.length) {
+          // if login details are valid return 200 OK with user details
+          let user = filteredUsers[0];
+
+          return of(new HttpResponse({ status: 200, body: user }));
+      } else {
+          // else return 400 bad request
+          return throwError({ error: { message: 'Email ou senha incorretos.' } });
+      }
+    }
     return next.handle(request);
   }
 }

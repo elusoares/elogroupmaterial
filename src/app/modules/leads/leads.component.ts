@@ -29,7 +29,7 @@ export class LeadsComponent implements OnInit {
   getLeads() {
     this.savedLeads = [];
     let temp: LeadModel[] = this.storageService.getLeads();
-    console.log(this.storageService.getUsers());
+    console.log(this.storageService.getCurrentUser());
     if (temp.length > 0) {
       this.savedLeads = [...temp];
       this.sortLeads();

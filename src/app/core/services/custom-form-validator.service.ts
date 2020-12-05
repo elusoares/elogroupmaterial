@@ -26,7 +26,6 @@ export class CustomFormValidatorService {
   }
 
   matchPasswordValidator(password: string, confirmPassword: string) {
-    console.log(password);
     return (formGroup: FormGroup) => {
       const passwordControl = formGroup.controls[password];
       const confirmPasswordControl = formGroup.controls[confirmPassword];
@@ -44,16 +43,6 @@ export class CustomFormValidatorService {
         confirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         confirmPasswordControl.setErrors(null);
-      }
-    };
-  }
-
-  takenUserValidator(error: boolean, email: string) {
-    console.log(error);
-    return (formGroup: FormGroup) => {
-      const emailControl = formGroup.controls[email];
-      if (error) {
-        emailControl.setErrors({takenUser: true});
       }
     };
   }

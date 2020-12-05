@@ -3,13 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  // coloquei isso aqui porque gostaria que aplicação fosse direto para o login quando iniciasse
-  // então para não precisar criar um guard, achei que isso fosse mais prático
-  {
-    path: '',
-    redirectTo: '/leads',
-    pathMatch: 'full'
-  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginModule)
