@@ -5,6 +5,7 @@ import { MatSelectionList } from '@angular/material/list';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CustomFormValidatorService } from 'src/app/core/services/custom-form-validator.service';
+import { FakeBackendService } from 'src/app/core/services/fake-backend.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { LeadModel, OpportunityInterface, LeadStatus } from './lead-model';
 
@@ -30,7 +31,7 @@ export class NewLeadComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private customFormValidatorService: CustomFormValidatorService,
-    private storageService: StorageService,
+    private fakeBackendService: FakeBackendService,
     private router: Router
     ) {
     this.newLeadForm = this.formBuilder.group({
@@ -54,27 +55,31 @@ export class NewLeadComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // salva a lead
   saveLead() {
     this.submitted = true;
     if (this.newLeadForm.valid) {
-    let newLead: LeadModel  = new LeadModel(
+      let newLead: LeadModel  = new LeadModel(
         this.newLeadForm.get('name').value,
         this.newLeadForm.get('phone').value,
         this.newLeadForm.get('email').value,
         this.newLeadForm.get('selectedOpportunities').value,
         LeadStatus.clienteEmPotencial
-    );
-    this.storageService.saveOneLead(newLead);
-    this.openSnackBar('Lead incluído com sucesso', 'fechar');
-    this.router.navigateByUrl('/leads');
-    console.log(newLead);
+      );
+      this.fakeBackendService.newLead(newLead).subscribe((data) => {
+        this.openSnackBar('Lead incluído com sucesso', 'fechar');
+        this.router.navigateByUrl('/leads');
+      },
+      (error) => {
+        console.log(error);
+      });
     }
   }
 
-  selectAll(event: MatCheckboxChange, options: MatSelectionList) {
+  // marca ou desmarca todas as oportunidades
+  selectAllOpportunities(event: MatCheckboxChange, options: MatSelectionList) {
     if (event.checked) {
       options.selectAll();
-      // options.selectedOptions.selected.map(o => console.log(o.value));
     } else {
       options.deselectAll();
     }

@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      console.log('form valido');
       this.fakeBackendService.login(
         this.loginForm.get('email').value,
         this.loginForm.get('password').value

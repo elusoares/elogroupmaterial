@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { ModulesModule } from './modules/modules.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FakeBackendInterceptor } from './core/interceptors/fake-backend.interceptor';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FakeBackendInterceptor } from './core/interceptors/fake-backend.interce
     CoreModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

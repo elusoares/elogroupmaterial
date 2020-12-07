@@ -31,7 +31,7 @@
             <span>Oportunidades</span>
           </div>
           <mat-selection-list #opport formControlName="selectedOpportunities">
-            <mat-checkbox (change)="selectAll($event, opport)"> Selecionar todos</mat-checkbox>
+            <mat-checkbox (change)="selectAllOpportunities($event, opport)"> Selecionar todos</mat-checkbox>
             <mat-list-option  class="mat-primary" [checkboxPosition]="'before'" *ngFor="let opportunity of opportunities" [value]="opportunity">
               {{opportunity.name}}
             </mat-list-option>

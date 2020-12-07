@@ -1,3 +1,4 @@
+import { CurrentUserModel } from './../../modules/user/current-user-model';
 import { Injectable } from '@angular/core';
 import { LeadModel } from 'src/app/modules/new-lead/lead-model';
 import { UserModel } from 'src/app/modules/user/user-model';
@@ -26,31 +27,11 @@ export class StorageService {
 
   // salva uma nova lead.
   saveOneLead(lead: LeadModel) {
-    // antes de salvar, verificar se ja existe um array de leads com a key 'leads'.
-    // se já existir, a nova lead será iterada ao array existente.
-    // se nao existir, será criado um novo registro.
-    // saveLeads armazena temporariamente o possivel array de leads que ja esta armazenado
+    // salva todos os leads na variavel savedLeads.
     let savedLeads: LeadModel[] = this.getLeads();
-    // newSaveLeads é uma variável que ajudará a incluir uma nova lead no array de leads
-    /* let newSavedLeads: LeadModel[] = [];
-    // se o tamanho de saveLeads é 0, entao nao ha nenhum registro no storage
-    if (savedLeads.length === 0) {
-      // ai vamos criar um novo registro iterando a nova lead ao array newSaveLeads
-      newSavedLeads = [...newSavedLeads, lead];
-      console.log('nao tem leads cadastradas');
-      // e entao adicionar o registro
-      this.localStorage.setItem(StorageKeys.leads, JSON.stringify(newSavedLeads));
-    } else { // se saveLeads nao é 0, entao ja existe um array de leads armazenado
-      console.log('tem lead cadastrada');
-      console.log(savedLeads);
-      // ai iteramos a nova lead a saveLeads
-      savedLeads = [...savedLeads, lead];
-      console.log(savedLeads);
-      // e sobrescreve o registro existente
-      this.localStorage.setItem(StorageKeys.leads, JSON.stringify(savedLeads));
-    } */
+    // adiciona o novo lead
     savedLeads.push(lead);
-    // e entao adicionar o registro
+    // sobrescreve o registro de leads
     this.localStorage.setItem(StorageKeys.leads, JSON.stringify(savedLeads));
   }
 
@@ -68,7 +49,6 @@ export class StorageService {
   // salva um usuario
   saveOneUser(user: UserModel) {
     // salva todos os usuarios na variavel savedUsers.
-    // getUsers() retornará um array com os users ou um array vazio se nao houver user salvo
     let savedUsers: UserModel[] = this.getUsers();
     // adiciona o novo user em savedUsers
     savedUsers.push(user);
@@ -82,18 +62,22 @@ export class StorageService {
     return JSON.parse(this.localStorage.getItem(StorageKeys.users)) || [];
   }
 
+  // sobrescreve os usuários existentes
   replaceUsers(users: UserModel[]) {
     this.localStorage.setItem(StorageKeys.users, JSON.stringify(users));
   }
 
-  getCurrentUser(): UserModel {
+  // retorna o current user
+  getCurrentUser(): CurrentUserModel {
     return JSON.parse(this.localStorage.getItem(StorageKeys.currentUser));
   }
 
-  saveCurrentUser(user: UserModel) {
+  // cria um novo currentUser
+  saveCurrentUser(user: CurrentUserModel) {
     this.localStorage.setItem(StorageKeys.currentUser, JSON.stringify(user));
   }
 
+  // deleta o currentUser
   deleteCurrentUser() {
     this.localStorage.removeItem(StorageKeys.currentUser);
   }

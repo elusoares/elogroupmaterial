@@ -54,7 +54,6 @@ export class SignupComponent implements OnInit {
 
   register() {
     if (this.signupForm.valid) {
-      console.log('form valido');
       let newUser: UserModel = new UserModel(
         this.signupForm.get('name').value,
         this.signupForm.get('email').value,
